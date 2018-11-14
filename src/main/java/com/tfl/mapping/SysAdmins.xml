@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tfl.dao.SysAdminsMapper">
+
+    <sql id="baseColumn">
+    	id,idserial,password
+	</sql>
+
+    <resultMap id="BaseSysAdminsMap" type="com.tfl.entity.SysAdmins">
+        <id column="id" property="id"/>
+        <result column="idserial" property="idserial"/>
+        <result column="password" property="password"/>
+    </resultMap>
+
+    <select id="querySysAdminsList" resultMap="BaseSysAdminsMap">
+        SELECT
+        <include refid="baseColumn" />
+        FROM sys_admins
+        <where>
+            <if test="idserial!=null and idserial!=''">
+                AND idserial = #{idserial}
+            </if>
+            <if test="password!=null and password!=''">
+                AND password = #{password}
+            </if>
+        </where>
+    </select>
+</mapper>
