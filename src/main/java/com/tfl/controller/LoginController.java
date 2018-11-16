@@ -9,7 +9,7 @@ import javax.annotation.Resource;
 import java.util.List;
 
 @Controller
-@RequestMapping("loginBulletin")
+@RequestMapping("login")
 public class LoginController {
 
     @Resource

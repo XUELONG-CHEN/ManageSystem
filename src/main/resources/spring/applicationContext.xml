@@ -26,12 +26,13 @@
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource" />
         <property name="configLocation" value="classpath:mybatis/mybatis-config.xml" />
+        <property name="mapperLocations" value="classpath:/com/tfl/mapping/*.xml" />
     </bean>
 
     <!--3. mybatis自动扫描加载Sql映射文件/接口 : MapperScannerConfigurer sqlSessionFactory
         basePackage:指定sql映射文件/接口所在的包（自动扫描）    -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.cxl.mapper" />
+        <property name="basePackage" value="com.tfl.dao" />
         <!-- error:创建实体类异常,创建下一层对,通过对象调用方法，可能会出现这个异常-->
         <!-- <property name="sqlSessionFactory" ref="sqlSessionFactory"></property> -->  <!-- 会引起无法加载配置文件 -->
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
