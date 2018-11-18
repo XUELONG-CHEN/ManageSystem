@@ -11,12 +11,9 @@
                         http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
 
 	<mvc:annotation-driven />
-	<!-- 配置拦截器 -->
-	<!-- 扫描controller包 -->
+
 	<context:component-scan base-package="com.tfl" />
-	<!-- 完成请求和注解POJO的映射 ,com.tfl.controller:@com.tfl.controller,@requsetMapping-->
-	<!-- <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />-->
-	<!-- 页面转向解析 -->
+
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/pages" />
 		<property name="suffix" value=".jsp" />

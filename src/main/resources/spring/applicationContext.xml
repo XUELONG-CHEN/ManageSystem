@@ -13,7 +13,7 @@
     <!-- 加载配置文件 -->
     <context:property-placeholder location="classpath:db.properties" />
 
-    <!-- 1. 数据源 : DriverManagerDataSource -->
+    <!-- 数据源1(默认) : DriverManagerDataSource -->
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="${jdbc.driverClasss}" />
         <property name="url" value="${jdbc.url}" />
@@ -21,26 +21,21 @@
         <property name="password" value="${jdbc.password}" />
     </bean>
 
-    <!--2. mybatis的SqlSession的工厂: SqlSessionFactoryBean dataSource:
-        引用数据源MyBatis定义数据源,同意加载配置-->
+    <!--2. mybatis的SqlSession的工厂: SqlSessionFactoryBean dataSource:引用数据源MyBatis定义数据源,同意加载配置-->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource" />
         <property name="configLocation" value="classpath:mybatis/mybatis-config.xml" />
         <property name="mapperLocations" value="classpath:/com/tfl/mapping/*.xml" />
     </bean>
 
-    <!--3. mybatis自动扫描加载Sql映射文件/接口 : MapperScannerConfigurer sqlSessionFactory
-        basePackage:指定sql映射文件/接口所在的包（自动扫描）    -->
+    <!--3. mybatis自动扫描加载Sql映射文件/接口 : MapperScannerConfigurer sqlSessionFactory basePackage:指定sql映射文件/接口所在的包（自动扫描）-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="com.tfl.dao" />
-        <!-- error:创建实体类异常,创建下一层对,通过对象调用方法，可能会出现这个异常-->
-        <!-- <property name="sqlSessionFactory" ref="sqlSessionFactory"></property> -->  <!-- 会引起无法加载配置文件 -->
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
     </bean>
 
-    <!--4. 事务管理 : DataSourceTransactionManager dataSource:引用上面定义的数据源    -->
-    <bean id="txManager"
-          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+    <!--4. 事务管理 : DataSourceTransactionManager dataSource:引用上面定义的数据源 -->
+    <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource"></property>
     </bean>
 

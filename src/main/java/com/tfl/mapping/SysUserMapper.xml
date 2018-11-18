@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tfl.dao.SysUserMapper">
+
+	<sql id="baseColumn">
+    	id, username, password
+	</sql>
+
+	<resultMap id="BaseMap" type="com.tfl.entity.SysUser">
+	    <id column="id" property="id"/>
+	    <result column="username" property="username"/>
+	    <result column="password" property="password"/>
+  	</resultMap>
+
+	<select id="querySysUserList" resultMap="BaseMap">
+		SELECT 
+		<include refid="baseColumn" />
+		FROM sys_user
+		<!--<where>
+			<if test="username!=null and username!=''">
+   			AND username = #{username}
+   			</if>
+   			<if test="password!=null and password!=''">
+   			AND password = #{password}
+   			</if>
+		</where>-->
+	</select>
+
+</mapper>
