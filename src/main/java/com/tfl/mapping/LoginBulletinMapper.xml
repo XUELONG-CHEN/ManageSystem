@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tfl.dao.LoginBulletinMapper">
+
+	<sql id="baseColumn">
+    	f_id, f_large_area, f_area_service, f_channel, f_type, f_content, f_effective_time
+	</sql>
+
+	<resultMap id="BaseBulletinMap" type="com.tfl.entity.LoginBulletin">
+	    <id column="f_id" property="id"/>
+	    <result column="f_large_area" property="largeArea"/>
+	    <result column="f_area_service" property="areaService"/>
+	    <result column="f_channel" property="channel"/>
+	    <result column="f_type" property="type"/>
+	    <result column="f_content" property="content"/>
+	    <result column="f_effective_time" property="effectiveTime"/>
+	    <result column="f_creator" property="creator"/>
+	    <result column="f_gmt_create" property="gmtCreate"/>
+	    <result column="f_updater" property="updater"/>
+	    <result column="f_gmt_create" property="gmtModified"/>
+  	</resultMap>
+
+	<select id="listLoginBulletin" resultMap="BaseBulletinMap">
+		SELECT 
+		<include refid="baseColumn" />
+		FROM t_login_bulletin
+		<where>
+			<if test="largeArea!=null and largeArea!=''">
+   			AND f_large_area = #{largeArea} 
+   			</if>
+   			<if test="areaService!=null and areaService!=''">
+   			AND f_area_service = #{areaService}
+   			</if>
+   			<if test="channel!=null and channel!=''">
+   			AND f_channel = #{channel}
+   			</if>
+		</where>
+	</select>
+
+</mapper>

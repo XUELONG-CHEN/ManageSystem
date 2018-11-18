@@ -1,8 +1,11 @@
 package com.tfl.controller;
 
-import com.tfl.entity.SysAdmins;
-import com.tfl.service.SysAdminsService;
+import com.tfl.entity.LoginBulletin;
+import com.tfl.entity.SysUser;
+import com.tfl.service.LoginBulletinService;
+import com.tfl.service.SysUserService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.Resource;
@@ -11,18 +14,15 @@ import java.util.List;
 @Controller
 @RequestMapping("login")
 public class LoginController {
+	
+	@Resource
+	private SysUserService sysUserService;
 
-    @Resource
-    private SysAdminsService sysAdminsService;
+	@RequestMapping("querySysUserList.do")
+	public String querySysUserList(Model model, SysUser SysUser){
+        List<SysUser> sysUserList = sysUserService.querySysUserList(SysUser);
+        model.addAttribute("sysUserList", sysUserList);
+		return "/game_bulletin/loginBulletin_list";
+	}
 
-    @RequestMapping("querySysAdminsList.do")
-    public String querySysAdminsList(SysAdmins sysAdmins){
-        List<SysAdmins> sysAdminsList = sysAdminsService.querySysAdminsList(sysAdmins);
-        if(sysAdminsList.size()>0){
-            System.out.println("进入成功");
-        }else{
-            System.out.println("进入失败");
-        }
-        return "/game_bulletin/loginBulletin_list";
-    }
 }

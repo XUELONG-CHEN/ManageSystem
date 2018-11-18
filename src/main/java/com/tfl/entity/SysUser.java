@@ -3,9 +3,9 @@ package com.tfl.entity;
 import lombok.Data;
 
 @Data
-public class SysAdmins {
+public class SysUser {
 
     private Integer id;
-    private String idserial;
+    private String username;
     private String password;
 }
