@@ -1,8 +1,6 @@
 package com.tfl.controller;
 
-import com.tfl.entity.LoginBulletin;
 import com.tfl.entity.SysUser;
-import com.tfl.service.LoginBulletinService;
 import com.tfl.service.SysUserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,17 +10,16 @@ import javax.annotation.Resource;
 import java.util.List;
 
 @Controller
-@RequestMapping("login")
-public class LoginController {
-	
-	@Resource
-	private SysUserService sysUserService;
+@RequestMapping("sysUser")
+public class SysUserController {
 
-	@RequestMapping("judgeSysUser.do")
-	public String querySysUserList(Model model, SysUser SysUser){
+    @Resource
+    private SysUserService sysUserService;
+
+    @RequestMapping("querySysUserList.do")
+    public String querySysUserList(Model model, SysUser SysUser){
         List<SysUser> sysUserList = sysUserService.querySysUserList(SysUser);
         model.addAttribute("sysUserList", sysUserList);
-		return "/index";
-	}
-
+        return "/sys_user/sysUser_list";
+    }
 }

@@ -1,17 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!DOCTYPE html>
 <html>
-<%--<head>
-    <title>登陆页面</title>
-    <form action="login/querySysUserList.do" method="post">
-        账号：<input type="username" name="username">
-        密码：<input type="password" name="password">
-        <input type="submit" value="登录">
-    </form>
-</head>
-<body>
-
-</body>--%>
-
 <head>
     <title>Flatty - Flat administration template</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport' />
@@ -63,53 +53,81 @@
     <link href='${pageContext.request.contextPath}/assets/stylesheets/light-theme.css' id='color-settings-body-color' media='all' rel='stylesheet' type='text/css' />
     <!-- / demo -->
     <link href='${pageContext.request.contextPath}/assets/stylesheets/demo.css' media='all' rel='stylesheet' type='text/css' />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-</head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
+<body class='contrast-red '>
 
-<body class='contrast-red sign-in contrast-background'>
+<%@include file="../top.jsp" %>
 <div id='wrapper'>
-    <div class='application'>
-        <div class='application-content'>
-            <a href="sign_in.html"><div class='icon-heart'></div>
-                <span>Flatty</span>
-            </a>
-        </div>
-    </div>
-    <div class='controls'>
-        <div class='caret'></div>
-        <div class='form-wrapper'>
-            <h1 class='text-center'>Sign in</h1>
-            <form accept-charset="UTF-8" action="login/judgeSysUser.do" method="post" />
-            <div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /></div>
-            <div class='row-fluid'>
-                <div class='span12 icon-over-input'>
-                    <input class="span12" id="username" name="username" placeholder="username" type="text" value="" />
-                    <i class='icon-user muted'></i>
+
+    <%@include file="../left.jsp" %>
+    <section id='content'>
+        <div class='container-fluid'>
+            <div class='row-fluid' id='content-wrapper'>
+                <div class='span12'>
+                    <div class='row-fluid'>
+                        <div class='span12'>
+                            <div class='page-header'>
+                                <h1 class='pull-left'>
+                                    <i class='icon-table'></i>
+                                    <span>Tables</span>
+                                </h1>
+                                <div class='pull-right'>
+                                    <ul class='breadcrumb'>
+                                        <li>
+                                            <a href="index.html"><i class='icon-bar-chart'></i>
+                                            </a>
+                                        </li>
+                                        <li class='separator'>
+                                            <i class='icon-angle-right'></i>
+                                        </li>
+                                        <li class='active'>Tables</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class='row-fluid'>
+                        <div class='span12 box bordered-box blue-border' style='margin-bottom:0;'>
+                            <div class='box-content box-no-padding'>
+                                <div class='responsive-table'>
+                                    <div class='scrollable-area'>
+                                        <table class='table' style='margin-bottom:0;'>
+                                            <thead>
+                                            <tr>
+                                                <th>
+                                                    用户名
+                                                </th>
+                                                <th>
+                                                    密码
+                                                </th>
+                                                <th>
+                                                    Status
+                                                </th>
+                                                <th></th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <c:forEach items="${sysUserList}" var="list">
+                                            <tr>
+                                                <td>${list.username}</td>
+                                                <td>${list.password}</td>
+                                                <td>
+                                                    <span class='label label-important'>Important</span>
+                                                </td>
+                                            </tr>
+                                            </c:forEach>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
-            <div class='row-fluid'>
-                <div class='span12 icon-over-input'>
-                    <input class="span12" id="password" name="password" placeholder="Password" type="password" value="" />
-                    <i class='icon-lock muted'></i>
-                </div>
-            </div>
-            <label class="checkbox" for="remember_me"><input id="remember_me" name="remember_me" type="checkbox" value="1" />
-                Remember me
-            </label>
-            <button class="btn btn-block" name="button" type="submit">Sign in</button>
-            </form>
-            <div class='text-center'>
-                <hr class='hr-normal' />
-                <a href="forgot_password.html">Forgot your password?</a>
-            </div>
         </div>
-    </div>
-    <div class='login-action text-center'>
-        <a href="sign_up.html"><i class='icon-user'></i>
-            New to Flatty?
-            <strong>Sign up</strong>
-        </a>
-    </div>
+    </section>
 </div>
 <!-- / jquery -->
 <script src='${pageContext.request.contextPath}/assets/javascripts/jquery/jquery.min.js' type='text/javascript'></script>
@@ -213,5 +231,5 @@
 <script src='${pageContext.request.contextPath}/assets/javascripts/demo/demo.js' type='text/javascript'></script>
 
 </body>
-
 </html>
+
