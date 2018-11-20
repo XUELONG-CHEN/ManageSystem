@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tfl.dao.TdArticleMapper">
+
+	<sql id="baseColumn">
+    	id, title, content, release_time
+	</sql>
+
+	<resultMap id="BaseMap" type="com.tfl.entity.TdArticle">
+	    <id column="id" property="id"/>
+	    <result column="title" property="title"/>
+	    <result column="content" property="content"/>
+	    <result column="release_time" property="releaseTime"/>
+  	</resultMap>
+
+    <insert id="addArticle" parameterType="com.tfl.entity.TdArticle">
+        INSERT INTO
+        td_article(
+          title,
+          content
+        ) VALUES(
+        #{title},
+        #{content}
+        )
+    </insert>
+
+</mapper>
