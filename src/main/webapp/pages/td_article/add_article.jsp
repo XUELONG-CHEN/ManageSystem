@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
 <html>
 <head>
     <title>Flatty - Flat administration template</title>
@@ -51,53 +52,72 @@
     <link href='${pageContext.request.contextPath}/assets/stylesheets/light-theme.css' id='color-settings-body-color' media='all' rel='stylesheet' type='text/css' />
     <!-- / demo -->
     <link href='${pageContext.request.contextPath}/assets/stylesheets/demo.css' media='all' rel='stylesheet' type='text/css' />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-</head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
+<body class='contrast-red '>
 
-<body class='contrast-red sign-in contrast-background'>
+<%@include file="../top.jsp" %>
 <div id='wrapper'>
-    <div class='application'>
-        <div class='application-content'>
-            <a href="sign_in.html"><div class='icon-heart'></div>
-                <span>Flatty</span>
-            </a>
-        </div>
-    </div>
-    <div class='controls'>
-        <div class='caret'></div>
-        <div class='form-wrapper'>
-            <h1 class='text-center'>Sign in</h1>
-            <form accept-charset="UTF-8" action="login/judgeSysUser.do" method="post" />
-            <div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /></div>
-            <div class='row-fluid'>
-                <div class='span12 icon-over-input'>
-                    <input class="span12" id="username" name="username" placeholder="username" type="text" value="" />
-                    <i class='icon-user muted'></i>
+    <%@include file="../left.jsp" %>
+    <section id='content'>
+        <div class='container-fluid'>
+            <div class='row-fluid' id='content-wrapper'>
+                <div class='span12'>
+                    <div class='row-fluid'>
+                        <div class='span12'>
+                            <div class='page-header'>
+                                <h1 class='pull-left'>
+                                    <i class='icon-edit'></i>
+                                    <span>新建文章</span>
+                                </h1>
+                                <div class='pull-right'>
+                                    <ul class='breadcrumb'>
+                                        <li>
+                                            <a href="index.html"><i class='icon-bar-chart'></i>
+                                            </a>
+                                        </li>
+                                        <li class='separator'>
+                                            <i class='icon-angle-right'></i>
+                                        </li>
+                                        <li>
+                                            Forms
+                                        </li>
+                                        <li class='separator'>
+                                            <i class='icon-angle-right'></i>
+                                        </li>
+                                        <li class='active'>Form components</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class='row-fluid'>
+                        <div class='span12 box'>
+                            <div class='box-content'>
+                                <div class='control-group'>
+                                    <label class='control-label' ><h1>标题</h1></label>
+                                    <div class='controls'>
+                                        <input class='input-block-level' id='articleTitle' placeholder='Text field' type='text' />
+                                    </div>
+                                </div>
+                                <textarea class="span12 wysihtml5" cols="40" id="articleContent" placeholder="Some text here..." rows="10">
+                                    &lt;h1&gt;Hello from Flatty!&lt;/h1&gt;
+                                </textarea>
+                                <div class='form-actions' style='margin-bottom: 0;'>
+                                    <div class='text-right'>
+                                        <%--<div class='btn btn-primary btn-large'>
+                                            <i class='icon-save'></i>
+                                            Save
+                                        </div>--%>
+                                        <input type="button" id="saveArticle" class="btn btn-primary" value="提交">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class='row-fluid'>
-                <div class='span12 icon-over-input'>
-                    <input class="span12" id="password" name="password" placeholder="Password" type="password" value="" />
-                    <i class='icon-lock muted'></i>
-                </div>
-            </div>
-            <label class="checkbox" for="remember_me"><input id="remember_me" name="remember_me" type="checkbox" value="1" />
-                Remember me
-            </label>
-            <button class="btn btn-block" name="button" type="submit">Sign in</button>
-            </form>
-            <div class='text-center'>
-                <hr class='hr-normal' />
-                <a href="forgot_password.html">Forgot your password?</a>
-            </div>
         </div>
-    </div>
-    <div class='login-action text-center'>
-        <a href="sign_up.html"><i class='icon-user'></i>
-            New to Flatty?
-            <strong>Sign up</strong>
-        </a>
-    </div>
+    </section>
 </div>
 <!-- / jquery -->
 <script src='${pageContext.request.contextPath}/assets/javascripts/jquery/jquery.min.js' type='text/javascript'></script>
@@ -200,6 +220,37 @@
 <script src='${pageContext.request.contextPath}/assets/javascripts/demo/charts.js' type='text/javascript'></script>
 <script src='${pageContext.request.contextPath}/assets/javascripts/demo/demo.js' type='text/javascript'></script>
 
-</body>
+<script type="text/javascript">
+    $(function(){
+        $("#saveArticle").click(function(){
+            alert("进入了");
+            var articleTitle = $("#articleTitle").val();
+            var articleContent = $("#articleContent").val();
+            if(articleTitle == '' && articleTitle == null){
+                alert("请输入标题！");
+                return false;
+            }
+            $.ajax({
+                url:"../tdArticle/addArticle.do",
+                type:"post",
+                data:{
+                    "title":articleTitle,
+                    "content":articleContent,
+                },
+                success:function(data)
+                {
+                    alert("提交成功！");
+                }
+                /*error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    alert(XMLHttpRequest.status);
+                    alert(XMLHttpRequest.readyState);
+                    alert(textStatus);
+                }*/
+            });
+        });
+    });
 
+</script>
+
+</body>
 </html>
